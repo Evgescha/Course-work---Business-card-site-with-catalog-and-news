@@ -149,6 +149,58 @@ td {
 	</section>
 	
 	
+		<section class="users">
+		<div class="container my-2">
+			<div class="card">
+				<div class="row">
+					<div class="card-body col">
+						<!-- 			    Если такого  нету -->
+						<div th:if="${listUser==null}" class="text-center">
+							<h2 class="text-center">Нет отозвавшихся людей</h2>
+<!-- 							<a href="/admin/create" class="btn btn-primary mx-auto "> -->
+<!-- 								<i class="fas fa-plus"> Создать </i> -->
+<!-- 							</a> -->
+						</div>
+						<!-- 			    Если такой  есть -->
+						<div th:if="${listUser!=null}">
+							<h2 class="text-center">Отозвавшиеся</h2>
+
+							<div th:switch="${listNews}" class="container my-5">
+								<div class="col-md-12">
+									<h2 th:case="null">Отозвавшихся не найдено</h2>
+									<div th:case="*" class="bigTable">
+										<table class="table table-striped table-responsive-md">
+											<thead>
+												<tr>
+													<th>ФИО</th>
+													<th>Телефон</th>
+													<th>Почта</th>
+													
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="entity : ${listUser}">
+													<td th:text="${entity.fio}"></td>
+													<td th:text="${entity.phone}"></td>
+													<td th:text="${entity.email}"></td>
+													<td>
+														<p class="d-flex justify-content-end">
+															<a th:href="'/admin/edit/'+${entity.id}"	class="btn btn-primary mx-2">Изменить</a> 
+															<a th:href="'/admin/delete/'+${entity.id}" class="btn btn-primary mx-2">Удалить</a>
+														</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 	
 	
 </body>

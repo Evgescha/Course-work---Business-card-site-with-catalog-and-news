@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cardSite.businessCardSite.entity.NewsVariant;
 import com.cardSite.businessCardSite.entity.TrendVariant;
+import com.cardSite.businessCardSite.entity.UserReg;
 import com.cardSite.businessCardSite.service.NewsVariantService;
 import com.cardSite.businessCardSite.service.TrendVariantService;
+import com.cardSite.businessCardSite.service.UserRegService;
 
 @Controller
 @RequestMapping("/admin")
@@ -26,12 +28,17 @@ public class AdminController {
 	@Autowired
 	TrendVariantService serviceTrendVariant;
 
+	@Autowired
+	UserRegService serviceUserReg;
+
 	@GetMapping
 	String getAdminList(Model model) {
 		List<NewsVariant> listNews = serviceNewsVariant.repository.findAll();
 		List<TrendVariant> listTrend = serviceTrendVariant.repository.findAll();
+		List<UserReg> listUser = serviceUserReg.repository.findAll();
 		model.addAttribute("listNews", listNews);
 		model.addAttribute("listTrend", listTrend);
+		model.addAttribute("listUser", listUser);
 		return "admin";
 	}
 
@@ -94,5 +101,40 @@ public class AdminController {
 		return "redirect:/admin";
 	}
 
+	
+	@GetMapping
+	@RequestMapping(path = { "/edit", "/edit/{id}" })
+	public String getAllUserRegById(Model model, @PathVariable(name = "id", required = false) Long id) {
+		if (id != null) {
+			UserReg read = serviceUserReg.read(id);
+			model.addAttribute("id", read.getId());
+			model.addAttribute("entity", read);
+		} else {
+			UserReg entity = new UserReg();
+			model.addAttribute("id", -1);
+			model.addAttribute("entity", entity);
+		}
+		return "user-add-edit";
+	}
+
+	
+	@PostMapping
+	@RequestMapping("/create")
+	public String saveTrend(Model model, UserReg entity) throws Exception {
+		serviceUserReg.create(entity);
+		return "redirect:/";
+	}
+
+	
+
+	@PostMapping
+	@RequestMapping(path = "/delete/{id}")
+	public String deleteUserReg(Model model, @PathVariable("id") Long id) throws Exception {
+		serviceUserReg.delete(id);
+		return "redirect:/";
+	}
+	
+	
+	
 	
 }
