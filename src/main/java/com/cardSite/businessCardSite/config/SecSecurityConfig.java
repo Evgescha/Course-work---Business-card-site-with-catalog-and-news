@@ -17,8 +17,6 @@ import org.springframework.security.web.access.expression.DefaultWebSecurityExpr
 @EnableWebSecurity
 public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    private UserDetailsServiceImpl userDetailsService;
     @Autowired
     private ApplicationContext context;
     @Bean
@@ -28,11 +26,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-//        .withUser("user").password(passwordEncoder().encode("user")).roles("USER")
-//        .and()
-        .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
-//        auth.userDetailsService(userDetailsService);
+    	auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
     }
 
     @Override
@@ -51,7 +45,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/","/css/**/**","/js/**/**","/img/**/**","/fonts/**/**","/vendors/**","/vendors/**/**","/vendors/**/**/**","/login","/j _spring_security_check").permitAll()
         .anyRequest().authenticated().and()
         .formLogin().loginPage("/login")
-	        .loginProcessingUrl("/login")
+	        .loginProcessingUrl("/login1")
 	        .failureUrl("/login?error=true")
 	        .defaultSuccessUrl("/") 
 	        .usernameParameter("username")

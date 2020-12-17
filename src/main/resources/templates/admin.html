@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link rel="icon" href="img/favicon.png" type="image/png" />
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="/css/bootstrap.css" />
+<link rel="stylesheet" href="/css/flaticon.css" />
+<link rel="stylesheet" href="/css/themify-icons.css" />
+<link rel="stylesheet" href="/vendors/owl-carousel/owl.carousel.min.css" />
+<link rel="stylesheet" href="/vendors/nice-select/css/nice-select.css" />
+<!-- main css -->
+<link rel="stylesheet" href="/css/style.css" />
+<title>Панель администратора</title>
+ <style>
+table {
+    table-layout: fixed;
+    width:100%
+}
+td {
+    word-wrap:break-word;
+}
+  </style>
+</head>
+<body>
+
+
+	<section class="trend">
+		<div class="container my-2">
+			<div class="card">
+				<div class="row">
+					<div class="card-body col">
+						<!-- 			    Если такого  нету -->
+						<div th:if="${listTrend==null}" class="text-center">
+							<h2 class="text-center">Нет созданных направлений</h2>
+							<a href="/admin/trend/create" class="btn btn-primary mx-auto ">
+								<i class="fas fa-plus"> Создать </i>
+							</a>
+						</div>
+						<!-- 			    Если такой  есть -->
+						<div th:if="${listTrend!=null}">
+							<h2 class="text-center">Направления</h2>
+
+							<div th:switch="${listTrend}" class="container my-5">
+								<div class="col-md-12">
+									<h2 th:case="null">Направлений не найдено</h2>
+									<div th:case="*" class="bigTable">
+										<table class="table table-striped table-responsive-md">
+											<thead>
+												<tr>
+													<th>Заголовок</th>
+													<th>Цена</th>
+													<th>Текст</th>
+													<th>Ссылка на картинку</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="entity : ${listTrend}" >
+													<td th:text="${entity.title}"></td>
+													<td th:text="${entity.price}"></td>
+													<td th:text="${entity.text}"></td>
+													<td th:text="${entity.urlToImage}"></td>
+													<td>
+														<p class="d-flex justify-content-end">
+															<a th:href="'/admin/trend/edit/'+${entity.id}"	class="btn btn-primary mx-2">Изменить</a> 
+															<a th:href="'/admin/trend/delete/'+${entity.id}" class="btn btn-primary mx-2">Удалить</a>
+														</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div>
+								<p class="d-flex justify-content-end">
+									<a href="/admin/trend/edit/" class="btn btn-primary mx-2">Добавить направление</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	
+	<section class="news">
+		<div class="container my-2">
+			<div class="card">
+				<div class="row">
+					<div class="card-body col">
+						<!-- 			    Если такого  нету -->
+						<div th:if="${listNews==null}" class="text-center">
+							<h2 class="text-center">Нет созданных новостей</h2>
+							<a href="/admin/news/create" class="btn btn-primary mx-auto ">
+								<i class="fas fa-plus"> Создать </i>
+							</a>
+						</div>
+						<!-- 			    Если такой  есть -->
+						<div th:if="${listNews!=null}">
+							<h2 class="text-center">Новости</h2>
+
+							<div th:switch="${listNews}" class="container my-5">
+								<div class="col-md-12">
+									<h2 th:case="null">Новостей найдено</h2>
+									<div th:case="*" class="bigTable">
+										<table class="table table-striped table-responsive-md">
+											<thead>
+												<tr>
+													<th>Заголовок</th>
+													<th>Дата</th>
+													<th>Текст</th>
+													<th>Ссылка на картинку</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="entity : ${listNews}">
+													<td th:text="${entity.title}"></td>
+													<td th:text="${entity.dates}"></td>
+													<td th:text="${entity.text}"></td>
+													<td th:text="${entity.urlToImage}"></td>
+													<td>
+														<p class="d-flex justify-content-end">
+															<a th:href="'/admin/news/edit/'+${entity.id}"	class="btn btn-primary mx-2">Изменить</a> 
+															<a th:href="'/admin/news/delete/'+${entity.id}" class="btn btn-primary mx-2">Удалить</a>
+														</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div>
+								<p class="d-flex justify-content-end">
+									<a href="/admin/news/edit/" class="btn btn-primary mx-2">Добавить новость</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	
+	
+	
+</body>
+
+</html>

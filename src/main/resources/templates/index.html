@@ -162,26 +162,21 @@
           <!-- single course -->
           <div class="col-lg-12">
             <div class="owl-carousel active_course">
-
-
-
-              <div class="single_course">
+              <div class="single_course" th:each="entity : ${listTrend}">
                 <div class="course_head">
-                  <img class="img-fluid" src="img/courses/c1.jpg" alt="" />
+                  <img class="img-fluid" th:src="${entity.urlToImage}" />
                 </div>
                 <div class="course_content">
-                  <span class="price">$25</span>
-                  <span class="tag mb-4 d-inline-block">Java1</span>
-                  <h4 class="mb-3">
-                    <a href="course-details.html">Обучение основам</a>
+                  <span class="price" th:text="${entity.price}">$25</span>
+<!--                   <span class="tag mb-4 d-inline-block">Java1</span> -->
+                  <h4 class="mb-3" th:text="${entity.title}">
+<!--                     <a href="course-details.html">Обучение основам</a> -->
                   </h4>
-                  <p>
+                  <p th:text="${entity.text}">
                     Быстрое получение знаний по основам программирования на языке высокого уровня Java. С первых же уроков вы начинаете писать программы своими руками!
                   </p>
                 </div>
-              </div>
-
-            
+              </div>            
 
             </div>
           </div>
@@ -340,32 +335,24 @@
           </div>
         </div>
         <div class="row">
-
            <div class="col-lg-12">
             <div class="owl-carousel active_course">
-
-
-
-              <div class="single_course">
+            
+              <div class="single_course" th:each="entity : ${listNews}">
                 <div class="course_head">
-                  <img class="img-fluid" src="img/courses/c1.jpg" alt="" />
+                  <img class="img-fluid" th:src="${entity.urlToImage}" />
                 </div>
                 <div class="course_content">
-                  <span class="dateNews">25.05.2020</span>
-                  <span class="tag mb-4 d-inline-block">Все набранные участники поступили в гарвард</span>                  
-                  <p>
+                  <span class="dateNews" th:text="${entity.dates}">25.05.2020</span>
+                  <span class="tag mb-4 d-inline-block" th:text="${entity.title}">Все набранные участники поступили в гарвард</span>                  
+                  <p th:text="${entity.text}">
                     Так уж вышло, что к нам на обучение пришло 15 человек, которые продолжили учиться по нашей методике. И вот, все они подали заявления на поступление в гарвард и прошли!
                   </p>
-                  <a href="#" class="primary-btn">Подробнее</a>
+<!--                   <a href="#" class="primary-btn">Подробнее</a> -->
                 </div>
               </div>
-
-            
-
             </div>
           </div>
-
-
         </div>
       </div>
     </div>
