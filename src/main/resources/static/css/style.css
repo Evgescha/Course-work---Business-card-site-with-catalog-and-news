@@ -3362,3 +3362,9 @@ h6 {
 /*---------------------------------------------------- */
 
 /*# sourceMappingURL=style.css.map */
+ html {
+  scroll-behavior: smooth; /* свойство scroll-behavior не наследуется, применяется к прокручиваемым блокам */ 
+}
+.dateNews{
+  font-size: 15px;
+}
