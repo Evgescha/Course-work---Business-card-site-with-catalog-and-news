@@ -131,7 +131,7 @@ public class AdminController {
 	@RequestMapping(path = "/delete/{id}")
 	public String deleteUserReg(Model model, @PathVariable("id") Long id) throws Exception {
 		serviceUserReg.delete(id);
-		return "redirect:/";
+		return "redirect:/admin";
 	}
 	
 	
